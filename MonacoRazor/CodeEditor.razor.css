@@ -1,5 +1,5 @@
-﻿.my-component {
-    border: 2px dashed red;
-    padding: 1em;
+﻿.editor {
+    border: 2px solid gray;
     margin: 1em 0;
+    min-height: 300px;
 }

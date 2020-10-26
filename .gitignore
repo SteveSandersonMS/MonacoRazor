@@ -3,4 +3,6 @@ bin/
 obj/
 *.csproj.user
 node_modules/
-MonacoRazor/wwwroot/main.*
+MonacoRazor/wwwroot/*.js
+MonacoRazor/wwwroot/*.js.map
+MonacoRazor/wwwroot/*.ttf
