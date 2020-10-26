@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30516.212
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonacoRazor.Sample", "MonacoRazor.Sample\MonacoRazor.Sample.csproj", "{C26C5C86-C3C4-4B53-A8DC-090D0AC1C422}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonacoRazor", "MonacoRazor\MonacoRazor.csproj", "{BD7DDE35-8232-4881-8A3B-A01C4DF6E53D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C26C5C86-C3C4-4B53-A8DC-090D0AC1C422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C26C5C86-C3C4-4B53-A8DC-090D0AC1C422}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C26C5C86-C3C4-4B53-A8DC-090D0AC1C422}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C26C5C86-C3C4-4B53-A8DC-090D0AC1C422}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD7DDE35-8232-4881-8A3B-A01C4DF6E53D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD7DDE35-8232-4881-8A3B-A01C4DF6E53D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD7DDE35-8232-4881-8A3B-A01C4DF6E53D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD7DDE35-8232-4881-8A3B-A01C4DF6E53D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CC8746CE-6164-4A6D-B341-D39A818681EF}
+	EndGlobalSection
+EndGlobal
