@@ -1,4 +1,5 @@
 ﻿@inject IJSRuntime JS
+@implements IAsyncDisposable
 
 <div class="editor" @ref="element"></div>
 
@@ -7,13 +8,15 @@
     [Parameter] public string Code { get; set; }
     [Parameter] public EventCallback<string> CodeChanged { get; set; }
 
+    private DotNetObjectReference<CodeEditor> thisReference;
     private ElementReference element;
     private readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
     public CodeEditor()
     {
+        thisReference = DotNetObjectReference.Create(this);
         moduleTask = new(() => JS.InvokeAsync<IJSObjectReference>(
-               "import", "./_content/MonacoRazor/main.js").AsTask());
+           "import", "./_content/MonacoRazor/main.js").AsTask());
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -21,7 +24,23 @@
         if (firstRender)
         {
             var module = await moduleTask.Value;
-            await module.InvokeVoidAsync("init", element, Language ?? "csharp", Code);
+            await module.InvokeVoidAsync("init", element, thisReference, Language ?? "csharp", Code);
+        }
+    }
+
+    [JSInvokable]
+    public Task HandleEditorBlur(string newValue)
+    {
+        return CodeChanged.InvokeAsync(newValue);
+    }
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        thisReference.Dispose();
+        if (moduleTask.IsValueCreated)
+        {
+            var module = await moduleTask.Value;
+            await module.DisposeAsync();
         }
     }
 }
