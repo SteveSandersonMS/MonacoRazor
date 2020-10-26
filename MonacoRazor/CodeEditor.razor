@@ -3,6 +3,10 @@
 <div class="editor" @ref="element"></div>
 
 @code {
+    [Parameter] public string Language { get; set; }
+    [Parameter] public string Code { get; set; }
+    [Parameter] public EventCallback<string> CodeChanged { get; set; }
+
     private ElementReference element;
     private readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
@@ -17,7 +21,7 @@
         if (firstRender)
         {
             var module = await moduleTask.Value;
-            await module.InvokeVoidAsync("init", element);
+            await module.InvokeVoidAsync("init", element, Language ?? "csharp", Code);
         }
     }
 }

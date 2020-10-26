@@ -1,8 +1,9 @@
 import * as monaco from 'monaco-editor';
 
-export function init(element: HTMLElement) {
+export function init(element: HTMLElement, language: string, value: string) {
     monaco.editor.create(element, {
-        value: "function hello() {\n\talert('Hello world!');\n}",
-	    language: "javascript"
+        value: value,
+        language: language,
+        minimap: { enabled: false },
     });
 }

@@ -4,4 +4,15 @@
 
 Welcome to your new app.
 
-<CodeEditor />
+<CodeEditor Language="csharp" @bind-Code="source" />
+
+@source
+
+@code {
+    string source = @"namespace Sample
+{
+    public class MyClass
+    {
+    }
+}";
+}
