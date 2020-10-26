@@ -34,6 +34,16 @@
         return CodeChanged.InvokeAsync(newValue);
     }
 
+    [JSInvokable]
+    public Task<Suggestion[]> GetCompletions(string value, Position position)
+    {
+        return Task.FromResult(new[]
+        {
+            new Suggestion { InsertText = "From C#" },
+            new Suggestion { InsertText = "OK" },
+        });
+    }
+
     async ValueTask IAsyncDisposable.DisposeAsync()
     {
         thisReference.Dispose();
@@ -42,5 +52,16 @@
             var module = await moduleTask.Value;
             await module.DisposeAsync();
         }
+    }
+
+    public class Position
+    {
+        public int LineNumber { get; set; }
+        public int Column { get; set; }
+    }
+
+    public class Suggestion
+    {
+        public string InsertText { get; set; }
     }
 }
