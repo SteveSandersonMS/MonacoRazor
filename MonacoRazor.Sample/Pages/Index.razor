@@ -4,7 +4,7 @@
 
 Welcome to your new app.
 
-<CodeEditor Language="csharp" @bind-Code="source" />
+<CodeEditor Language="csharp" @bind-Code="source" OnCompletionsRequested="GetCompletionsAsync" />
 
 @source
 
@@ -15,4 +15,13 @@ Welcome to your new app.
     {
     }
 }";
+
+    Task<Suggestion[]> GetCompletionsAsync(string currentValue, Position position)
+    {
+        return Task.FromResult(new[]
+        {
+            new Suggestion { InsertText = "From C#" },
+            new Suggestion { InsertText = "OK" },
+        });
+    }
 }

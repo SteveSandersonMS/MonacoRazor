@@ -31,16 +31,18 @@ class RemoteCompletionItemProvider implements monaco.languages.CompletionItemPro
         if (component) {
             const value = model.getValue();
             const suggestions = await component.invokeMethodAsync('GetCompletions', value, position);
-            return {
-                suggestions: suggestions.map(s => ({
-                    kind: monaco.languages.CompletionItemKind.Function,
-                    label: s.insertText,
-                    insertText: s.insertText,
-                    range: null,
-                }))
-            };
-        } else {
-            return { suggestions: [] };
+            if (suggestions) {
+                return {
+                    suggestions: suggestions.map(s => ({
+                        kind: monaco.languages.CompletionItemKind.Function,
+                        label: s.insertText,
+                        insertText: s.insertText,
+                        range: null,
+                    }))
+                };
+            }
         }
+        
+        return { suggestions: [] };
     }
 }

@@ -7,6 +7,7 @@
     [Parameter] public string Language { get; set; }
     [Parameter] public string Code { get; set; }
     [Parameter] public EventCallback<string> CodeChanged { get; set; }
+    [Parameter] public Func<string, Position, Task<Suggestion[]>> OnCompletionsRequested { get; set; }
 
     private DotNetObjectReference<CodeEditor> thisReference;
     private ElementReference element;
@@ -36,13 +37,7 @@
 
     [JSInvokable]
     public Task<Suggestion[]> GetCompletions(string value, Position position)
-    {
-        return Task.FromResult(new[]
-        {
-            new Suggestion { InsertText = "From C#" },
-            new Suggestion { InsertText = "OK" },
-        });
-    }
+        => OnCompletionsRequested?.Invoke(value, position);
 
     async ValueTask IAsyncDisposable.DisposeAsync()
     {
@@ -52,16 +47,5 @@
             var module = await moduleTask.Value;
             await module.DisposeAsync();
         }
-    }
-
-    public class Position
-    {
-        public int LineNumber { get; set; }
-        public int Column { get; set; }
-    }
-
-    public class Suggestion
-    {
-        public string InsertText { get; set; }
     }
 }
