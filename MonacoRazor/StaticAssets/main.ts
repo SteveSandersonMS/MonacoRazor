@@ -33,11 +33,12 @@ class RemoteCompletionItemProvider implements monaco.languages.CompletionItemPro
             const suggestions = await component.invokeMethodAsync('GetCompletions', value, position);
             if (suggestions) {
                 return {
-                    suggestions: suggestions.map(s => ({
-                        kind: monaco.languages.CompletionItemKind.Function,
-                        label: s.insertText,
+                    suggestions: suggestions.map(s => (<monaco.languages.CompletionItem>{
+                        kind: s.kind,
+                        label: s.label,
                         insertText: s.insertText,
                         range: null,
+                        documentation: s.documentation,
                     }))
                 };
             }
