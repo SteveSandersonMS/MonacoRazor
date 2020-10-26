@@ -1,0 +1,8 @@
+{
+  "include": [ "./**/*.ts" ],
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ES2015",
+    "moduleResolution": "node",
+  }
+}

@@ -1,0 +1,23 @@
+﻿@inject IJSRuntime JS
+
+<div @ref="element"></div>
+
+@code {
+    private ElementReference element;
+    private readonly Lazy<Task<IJSObjectReference>> moduleTask;
+
+    public CodeEditor()
+    {
+        moduleTask = new(() => JS.InvokeAsync<IJSObjectReference>(
+               "import", "./_content/MonacoRazor/main.js").AsTask());
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("init", element);
+        }
+    }
+}
