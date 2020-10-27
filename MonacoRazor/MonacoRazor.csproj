@@ -8,6 +8,7 @@
   
   <ItemGroup>
     <SupportedPlatform Include="browser" />
+    <Content Update="StaticAssets\*" Pack="false" />
   </ItemGroup>
 
   <ItemGroup>
