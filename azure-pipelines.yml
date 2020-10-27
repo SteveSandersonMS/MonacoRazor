@@ -45,4 +45,4 @@ steps:
     command: push
     packagesToPush: 'artifacts/*.nupkg'
     nuGetFeedType: external
-    publishFeedCredentials: 'NuGet feed'
+    publishFeedCredentials: 'MonacoRazor feed'
