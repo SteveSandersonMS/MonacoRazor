@@ -4,6 +4,9 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Authors>Steve Sanderson</Authors>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <Description>A Blazor component that provides the Monaco code editor. NOTE: This is primarily intended for demo usage and does not expose the entire Monaco API surface.</Description>
   </PropertyGroup>
   
   <ItemGroup>
