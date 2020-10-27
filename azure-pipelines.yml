@@ -24,7 +24,7 @@ steps:
 
 # Actually creates the NuGet package file
 - script: dotnet pack --configuration $(buildConfiguration) /p:VersionSuffix=$(Build.BuildNumber)
-  workingDirectory: src/MonacoRazor
+  workingDirectory: MonacoRazor
   displayName: 'dotnet pack'
 - task: PublishBuildArtifacts@1
   inputs:
