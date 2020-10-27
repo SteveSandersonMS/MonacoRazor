@@ -1,0 +1,48 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+# Specify a particular version of the .NET SDK
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk'
+  inputs:
+    packageType: sdk
+    version: 5.0.100-rc.2.20461.9
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+# Build the solution. Not strictly required to create the package,
+# but we want the build to fail if any sample can't build.
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
+
+# Actually creates the NuGet package file
+- script: dotnet pack --configuration $(buildConfiguration) /p:VersionSuffix=$(Build.BuildNumber)
+  workingDirectory: src/MonacoRazor
+  displayName: 'dotnet pack'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'artifacts'
+    ArtifactName: 'artifacts'
+    publishLocation: 'Container'
+
+# Uploads the NuGet package file to nuget.org
+# Important notes:
+# 1. For this to work, you need to create a 'service connection' with the same name
+#    as the 'publishFeedCredentials' value.
+# 2. For security, you *must* ensure that 'Make secrets available to builds of forks'
+#    is disabled in your PR validation settings (inside build -> Edit -> Triggers).
+#    Otherwise, PRs would be able to push new packages even without being merged.
+- task: NuGetCommand@2
+  displayName: 'Publish to nuget.org'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  inputs:
+    command: push
+    packagesToPush: 'artifacts/*.nupkg'
+    nuGetFeedType: external
+    publishFeedCredentials: 'NuGet feed'
