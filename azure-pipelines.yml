@@ -14,7 +14,7 @@ steps:
   inputs:
     packageType: sdk
     includePreviewVersions: true
-    version: 5.0.100-rc.2.20461.9
+    version: 5.x
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
 # Build the solution. Not strictly required to create the package,
