@@ -20,8 +20,8 @@ Welcome to your new app.
     {
         return Task.FromResult(new[]
         {
-            new Suggestion { InsertText = "From C#" },
-            new Suggestion { InsertText = "OK" },
+            new Suggestion {Label = "From C#", InsertText = "From C#" },
+            new Suggestion {Label = "OK", InsertText = "OK" },
         });
     }
 }

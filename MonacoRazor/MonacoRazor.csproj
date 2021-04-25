@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <Import Project="StaticAssets\StaticAssets.targets" />
 
@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0-rc.2.20460.25" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.5" />
   </ItemGroup>
 
 </Project>
